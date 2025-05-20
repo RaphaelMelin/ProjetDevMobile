@@ -1,2 +1,0 @@
-# ProjetDevMobile
-Projet Développement Mobile

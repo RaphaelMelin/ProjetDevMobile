@@ -1,7 +1,0 @@
-<?xml version="1.0" encoding="utf-8"?>
-<resources>
-    <string name="app_name">ProjetDevMobile</string>
-
-    <string name="bouton_valider">Valider</string>
-    <string name="bouton_effacer">Effacer</string>
-</resources>
