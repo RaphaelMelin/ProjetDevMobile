@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/menu_go_back"
+        android:title="menu_go_back" />
+    <item
+        android:id="@+id/menu_life"
+        android:title="menu_life"
+        app:showAsAction="always" />
+    <item
+        android:id="@+id/menu_score"
+        android:title="menu_score"
+        app:showAsAction="always" />
+    <item
+        android:id="@+id/menu_timer"
+        android:title="menu_timer"
+        app:showAsAction="always" />
+</menu>

@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Qui suis-je ?</string>
+
+    <string name="button_validate">Valider</string>
+    <string name="button_erase">Supprimer</string>
+
+    <string name="button_play">Jouer</string>
+
+</resources>

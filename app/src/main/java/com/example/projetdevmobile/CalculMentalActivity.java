@@ -1,6 +1,9 @@
 package com.example.projetdevmobile;
 
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -15,19 +18,20 @@ import java.util.Random;
 
 public class CalculMentalActivity extends AppCompatActivity {
     private TextView textViewCalcul;
-    private TextView textViewResult;
-    private Button bouton1;
-    private Button bouton2;
-    private Button bouton3;
-    private Button bouton4;
-    private Button bouton5;
-    private Button bouton6;
-    private Button bouton7;
-    private Button bouton8;
-    private Button bouton9;
-    private Button bouton0;
-    private Button boutonValidate;
-    private Button boutonErase;
+    private TextView textViewAnswer;
+    private TextView textViewQuestion;
+    private Button button1;
+    private Button button2;
+    private Button button3;
+    private Button button4;
+    private Button button5;
+    private Button button6;
+    private Button button7;
+    private Button button8;
+    private Button button9;
+    private Button button0;
+    private Button buttonValidate;
+    private Button buttonErase;
     private Integer playerEntry=0;
     private Integer numeroRound;
 
@@ -35,51 +39,56 @@ public class CalculMentalActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState){
         super.onCreate(savedInstanceState);
         EdgeToEdge.enable(this);
-        setContentView(R.layout.activity_calculmental);
+        setContentView(R.layout.activity_mental_calculation);
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
             Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
             return insets;
         });
         textViewCalcul = findViewById(R.id.textViewCalcul);
-        bouton0 = findViewById(R.id.bouton0);
-        bouton1 = findViewById(R.id.bouton1);
-        bouton2 = findViewById(R.id.bouton2);
-        bouton3 = findViewById(R.id.bouton3);
-        bouton4 = findViewById(R.id.bouton4);
-        bouton5 = findViewById(R.id.bouton5);
-        bouton6 = findViewById(R.id.bouton6);
-        bouton7 = findViewById(R.id.bouton7);
-        bouton8 = findViewById(R.id.bouton8);
-        bouton9 = findViewById(R.id.bouton9);
-        bouton0.setOnClickListener(view->{
+        textViewAnswer = findViewById(R.id.textViewAnswer);
+        textViewQuestion = findViewById(R.id.textViewQuestion);
+        button0 = findViewById(R.id.button0);
+        button1 = findViewById(R.id.button1);
+        button2 = findViewById(R.id.button2);
+        button3 = findViewById(R.id.button3);
+        button4 = findViewById(R.id.button4);
+        button5 = findViewById(R.id.button5);
+        button6 = findViewById(R.id.button6);
+        button7 = findViewById(R.id.button7);
+        button8 = findViewById(R.id.button8);
+        button9 = findViewById(R.id.button9);
+        buttonValidate = findViewById(R.id.button_validate);
+        buttonErase = findViewById(R.id.button_erase);
+
+        button0.setOnClickListener(view->{
             appuieChiffre(0);
         });
-        bouton1.setOnClickListener(view->{
+        button1.setOnClickListener(view->{
             appuieChiffre(1);
         });
-        bouton2.setOnClickListener(view->{
+        button2.setOnClickListener(view->{
             appuieChiffre(2);
         });
-        bouton3.setOnClickListener(view->{
+        button3.setOnClickListener(view->{
             appuieChiffre(3);
         });
-        bouton4.setOnClickListener(view->{
+        button4.setOnClickListener(view->{
             appuieChiffre(4);
         });
-        bouton5.setOnClickListener(view->{
+        button5.setOnClickListener(view->{
             appuieChiffre(5);
         });
-        bouton6.setOnClickListener(view->{
+        button6.setOnClickListener(view->{
             appuieChiffre(6);
         });
-        bouton7.setOnClickListener(view->{
+        button7.setOnClickListener(view->{
             appuieChiffre(7);
         });
-        bouton8.setOnClickListener(view->{
+        button8.setOnClickListener(view->{
             appuieChiffre(8);
         });
-        bouton9.setOnClickListener(view->{
+        button9.setOnClickListener(view->{
             appuieChiffre(9);
         });
     }
@@ -89,36 +98,47 @@ public class CalculMentalActivity extends AppCompatActivity {
         playerEntry = 10*playerEntry+chiffre;
     }
 
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.menu_app,menu);
+        MenuItem menuReset = menu.findItem(R.id.menu_go_back);
+        menuReset.setOnMenuItemClickListener(view -> go_back());
+
+        //MenuItem menuCalcul = menu.findItem(R.id.menu_calcul);
+        //menuCalcul.setOnMenuItemClickListener(view -> {
+        //    Toast.makeText(CalculatriceActivity.this, TypeOperationEnum.calcul(typeOperation, premierElement, deuxiemeElement).toString(), Toast.LENGTH_LONG).show();
+        //    return true;
+        //});
+
+        return super.onCreateOptionsMenu(menu);
+    }
+
+    private boolean go_back(){
+        System.out.println("negro");
+        boolean negro = true;
+        return negro; //david
+    }
+
+
+
     private boolean reset(){
         playerEntry=0;
         textViewCalcul.setText("");
         return true;
     }
 
+
     private void getRoundCategory(Integer numeroRound) {
-        switch (true) {
-            case numeroRound < 10:
-                generateCalculVeryEasyMode();
-                break;
-            case numeroRound >= 10 && numeroRound < 20:
-                generateCalculEasyMode();
-                break;
-            case numeroRound >= 20 && numeroRound < 30:
-                generateCalculMediumMode();
-                break;
-            case numeroRound >= 30 && numeroRound < 40:
-                generateCalculHardMode();
-                break;
-            case numeroRound >= 40 && numeroRound < 50:
-                generateCalculExpertMode();
-                break;
-            case numeroRound==50:
-                generateCalculFinalMode();
-                break;
-            default:
-                return;
+        if (numeroRound < 10) {
+            generateCalculVeryEasyMode();
+        } else if (numeroRound < 20) {
+            generateCalculEasyMode();
+        } else if (numeroRound < 30) {
+            generateCalculMediumMode();
         }
     }
+
 
     public int RandomGenerator(int max, int min){
         Random random = new Random();
@@ -228,17 +248,5 @@ public class CalculMentalActivity extends AppCompatActivity {
                 break;
         }
         return resultatAttendu;
-    }
-
-    private Integer generateCalculHardMode(){
-
-    }
-
-    private Integer generateCalculExpertMode(){
-
-    }
-
-    private Integer generateCalculFinalMode(){
-
     }
 }
