@@ -2,6 +2,7 @@ package com.example.projetdevmobile;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.MenuItem;
 import android.widget.Button;
 import android.widget.Toast;
 
@@ -14,6 +15,7 @@ import androidx.core.view.WindowInsetsCompat;
 
 public class MainActivity extends AppCompatActivity {
     private Button buttonPlay;
+    private Button buttonAbout;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,7 +34,15 @@ public class MainActivity extends AppCompatActivity {
             startActivity(intent);
         });
 
+        //MenuItem menuAbout = menu.findItem(R.id.button_about);
+       // menuAbout.setOnMenuItemClickListener(view -> about());
 
+
+        buttonAbout = findViewById(R.id.button_about);
+        buttonAbout.setOnClickListener(v -> {
+            Intent intent = new Intent(this, AboutActivity.class);
+            startActivity(intent);
+        });
     }
 
 

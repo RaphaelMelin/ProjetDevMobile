@@ -1,5 +1,6 @@
 package com.example.projetdevmobile;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -102,8 +103,16 @@ public class CalculMentalActivity extends AppCompatActivity {
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater inflater = getMenuInflater();
         inflater.inflate(R.menu.menu_app,menu);
-        MenuItem menuReset = menu.findItem(R.id.menu_go_back);
-        menuReset.setOnMenuItemClickListener(view -> go_back());
+
+        // Set up les boutons
+
+        MenuItem menuGoBack = menu.findItem(R.id.menu_go_back);
+        menuGoBack.setOnMenuItemClickListener(view -> go_back());
+
+        MenuItem menuReset = menu.findItem(R.id.button_erase);
+        menuReset.setOnMenuItemClickListener(view -> erase());
+
+
 
         //MenuItem menuCalcul = menu.findItem(R.id.menu_calcul);
         //menuCalcul.setOnMenuItemClickListener(view -> {
@@ -117,12 +126,10 @@ public class CalculMentalActivity extends AppCompatActivity {
     private boolean go_back(){
         System.out.println("negro");
         boolean negro = true;
-        return negro; //david
+        return negro; //david or guerby or amhed or shak il olin
     }
 
-
-
-    private boolean reset(){
+    private boolean erase(){
         playerEntry=0;
         textViewCalcul.setText("");
         return true;

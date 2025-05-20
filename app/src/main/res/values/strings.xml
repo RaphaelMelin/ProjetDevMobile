@@ -15,6 +15,11 @@
     <string name="button_validate">Validate</string>
     <string name="button_erase">Erase</string>
 
+    <string name="textViewTitle">Guess me !</string>
     <string name="button_play">Play</string>
+
+    <string name="textViewAboutTitle">About</string>
+    <string name="textViewAboutDescription">Raphaël Mélin and Paul Maillard BUT2</string>
+
 
 </resources>

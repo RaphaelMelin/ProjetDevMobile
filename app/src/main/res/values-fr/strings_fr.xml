@@ -5,6 +5,11 @@
     <string name="button_validate">Valider</string>
     <string name="button_erase">Supprimer</string>
 
+    <string name="textViewTitle">Qui suis-je ?</string>
     <string name="button_play">Jouer</string>
+
+    <string name="textViewAboutTitle">A propos</string>
+    <string name="textViewAboutDescription">Raphaël Mélin et Paul Maillard BUT2</string>
+
 
 </resources>
