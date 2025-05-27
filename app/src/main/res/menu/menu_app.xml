@@ -3,18 +3,11 @@
     xmlns:android="http://schemas.android.com/apk/res/android">
 
     <item
-        android:id="@+id/menu_go_back"
-        android:title="menu_go_back" />
+        android:id="@+id/home_menu_item"
+        android:title="@string/home_menu_item"
+        app:showAsAction="ifRoom" />
     <item
-        android:id="@+id/menu_life"
-        android:title="menu_life"
-        app:showAsAction="always" />
-    <item
-        android:id="@+id/menu_score"
-        android:title="menu_score"
-        app:showAsAction="always" />
-    <item
-        android:id="@+id/menu_timer"
-        android:title="menu_timer"
-        app:showAsAction="always" />
+        android:id="@+id/about_menu_item"
+        android:title="@string/about_menu_item"
+        app:showAsAction="ifRoom" />
 </menu>

@@ -20,13 +20,22 @@
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
+            android:minWidth="200dp"
             android:orientation="vertical">
 
             <TextView
-                android:id="@+id/textViewTitle"
+                android:id="@+id/menu_title"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="@string/textViewTitle" />
+                android:text="@string/app_name"
+                android:gravity="center"
+                android:textSize="24sp"
+                android:textStyle="bold"
+                android:padding="16dp"
+                android:textColor="@android:color/black"
+            />
+
+
 
             <Button
                 android:id="@+id/button_play"
@@ -34,19 +43,32 @@
                 android:layout_height="wrap_content"
                 android:text="@string/button_play" />
 
-        </LinearLayout>
 
-        <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:gravity="bottom"
-            android:orientation="horizontal">
+            <ImageView
+                android:id="@+id/flag_img"
+                android:layout_width="48dp"
+                android:layout_height="32dp"
+                android:layout_gravity="center"
+                android:scaleType="fitCenter"
+                android:src="@drawable/ic_flag_eng" />
+
 
             <Button
-                android:id="@+id/button_about"
-                android:layout_width="wrap_content"
+                android:id="@+id/select_language_btn"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="@string/textViewAboutTitle" />
+                android:drawableStart="@drawable/ic_flag_fr"
+                android:text="@string/select_language_btn" />
+
+
+            <Button
+                android:id="@+id/quit_button"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:text="@string/button_quit" />
+
+
         </LinearLayout>
 
     </LinearLayout>

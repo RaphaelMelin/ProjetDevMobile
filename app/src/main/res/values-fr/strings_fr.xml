@@ -2,14 +2,19 @@
 <resources>
     <string name="app_name">Qui suis-je ?</string>
 
+
     <string name="button_validate">Valider</string>
     <string name="button_erase">Supprimer</string>
-
-    <string name="textViewTitle">Qui suis-je ?</string>
     <string name="button_play">Jouer</string>
+    <string name="select_language_btn">Choisir la langue</string>
+    <string name="button_quit">Quitter</string>
 
-    <string name="textViewAboutTitle">A propos</string>
-    <string name="textViewAboutDescription">Raphaël Mélin et Paul Maillard BUT2</string>
 
+    <string name="home_menu_item">Accueil</string>
+    <string name="about_menu_item">A propos</string>
+    <string name="life" formatted="true">Vie : %1$d</string>
+    <string name="score" formatted="true">Score : %1$d</string>
 
+    <string name="about_description">Raphaël Mélin et Paul Maillard BUT2</string>
+    <string name="edit_calcul_instruction">Entrez votre réponse</string>
 </resources>

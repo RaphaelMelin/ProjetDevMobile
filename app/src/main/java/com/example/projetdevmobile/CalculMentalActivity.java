@@ -2,12 +2,12 @@ package com.example.projetdevmobile;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.CountDownTimer;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.widget.Button;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
@@ -15,137 +15,139 @@ import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
+import java.util.Locale;
 import java.util.Random;
 
-public class CalculMentalActivity extends AppCompatActivity {
-    private TextView textViewCalcul;
+public class CalculMentalActivity extends BaseActivity  {
+    private TextView editCalcul;
     private TextView textViewAnswer;
     private TextView textViewQuestion;
-    private Button button1;
-    private Button button2;
-    private Button button3;
-    private Button button4;
-    private Button button5;
-    private Button button6;
-    private Button button7;
-    private Button button8;
-    private Button button9;
-    private Button button0;
+    private Integer resultatAttendu;
+    private TextView textViewLife;
+    private Integer life = 3;
+    private TextView textViewScore;
+    private Integer score = 0;
+    private TextView textViewTimer;
+    private CountDownTimer timer;
+
+    private Integer round = 1;
+
     private Button buttonValidate;
-    private Button buttonErase;
     private Integer playerEntry=0;
-    private Integer numeroRound;
+    private Integer numberRound;
 
     @Override
     protected void onCreate(Bundle savedInstanceState){
         super.onCreate(savedInstanceState);
         EdgeToEdge.enable(this);
         setContentView(R.layout.activity_mental_calculation);
-        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
-            Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
-            v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
-            return insets;
-        });
-        textViewCalcul = findViewById(R.id.textViewCalcul);
+
+        editCalcul = findViewById(R.id.edit_calcul);
         textViewAnswer = findViewById(R.id.textViewAnswer);
         textViewQuestion = findViewById(R.id.textViewQuestion);
-        button0 = findViewById(R.id.button0);
-        button1 = findViewById(R.id.button1);
-        button2 = findViewById(R.id.button2);
-        button3 = findViewById(R.id.button3);
-        button4 = findViewById(R.id.button4);
-        button5 = findViewById(R.id.button5);
-        button6 = findViewById(R.id.button6);
-        button7 = findViewById(R.id.button7);
-        button8 = findViewById(R.id.button8);
-        button9 = findViewById(R.id.button9);
+
+        textViewTimer = findViewById(R.id.timer);
+        textViewScore = findViewById(R.id.score);
+        textViewLife = findViewById(R.id.life);
+
         buttonValidate = findViewById(R.id.button_validate);
-        buttonErase = findViewById(R.id.button_erase);
-
-        button0.setOnClickListener(view->{
-            appuieChiffre(0);
+        buttonValidate.setOnClickListener(view->{
+            Validate();
         });
-        button1.setOnClickListener(view->{
-            appuieChiffre(1);
-        });
-        button2.setOnClickListener(view->{
-            appuieChiffre(2);
-        });
-        button3.setOnClickListener(view->{
-            appuieChiffre(3);
-        });
-        button4.setOnClickListener(view->{
-            appuieChiffre(4);
-        });
-        button5.setOnClickListener(view->{
-            appuieChiffre(5);
-        });
-        button6.setOnClickListener(view->{
-            appuieChiffre(6);
-        });
-        button7.setOnClickListener(view->{
-            appuieChiffre(7);
-        });
-        button8.setOnClickListener(view->{
-            appuieChiffre(8);
-        });
-        button9.setOnClickListener(view->{
-            appuieChiffre(9);
-        });
-    }
 
-    private void appuieChiffre(Integer chiffre){
-        textViewCalcul.setText(textViewCalcul.getText()+chiffre.toString());
-        playerEntry = 10*playerEntry+chiffre;
-    }
+        // Initialiser les textView
+        UpdateScore(0);
+        UpdateLife(0);
 
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        MenuInflater inflater = getMenuInflater();
-        inflater.inflate(R.menu.menu_app,menu);
+        generateQuestion();
 
-        // Set up les boutons
-
-        MenuItem menuGoBack = menu.findItem(R.id.menu_go_back);
-        menuGoBack.setOnMenuItemClickListener(view -> go_back());
-
-        MenuItem menuReset = menu.findItem(R.id.button_erase);
-        menuReset.setOnMenuItemClickListener(view -> erase());
-
-
-
-        //MenuItem menuCalcul = menu.findItem(R.id.menu_calcul);
-        //menuCalcul.setOnMenuItemClickListener(view -> {
-        //    Toast.makeText(CalculatriceActivity.this, TypeOperationEnum.calcul(typeOperation, premierElement, deuxiemeElement).toString(), Toast.LENGTH_LONG).show();
-        //    return true;
-        //});
-
-        return super.onCreateOptionsMenu(menu);
-    }
-
-    private boolean go_back(){
-        System.out.println("negro");
-        boolean negro = true;
-        return negro; //david or guerby or amhed or shak il olin
-    }
-
-    private boolean erase(){
-        playerEntry=0;
-        textViewCalcul.setText("");
-        return true;
     }
 
 
-    private void getRoundCategory(Integer numeroRound) {
-        if (numeroRound < 10) {
-            generateCalculVeryEasyMode();
-        } else if (numeroRound < 20) {
-            generateCalculEasyMode();
-        } else if (numeroRound < 30) {
-            generateCalculMediumMode();
+    private void startTimer(long durationMillis) {
+        // Si un timer est déjà actif, on l’arrête
+        if (timer != null) {
+            timer.cancel();
         }
+
+        timer = new CountDownTimer(durationMillis, 1000) {
+            @Override
+            public void onTick(long millisUntilFinished) {
+                long seconds = millisUntilFinished / 1000;
+                long minutes = seconds / 60;
+                long remainingSeconds = seconds % 60;
+                String timeFormatted = String.format(Locale.US, "%d:%02d", minutes, seconds);
+                textViewTimer.setText(timeFormatted);
+            }
+
+            @Override
+            public void onFinish() {
+                Validate();
+            }
+        }.start();
     }
 
+    private void ResetEditCalcul(){
+        editCalcul.setText(" ");
+    }
+
+    private void UpdateScore(Integer scoreValue){
+        score+=scoreValue;
+        String scoreText = getString(R.string.score, score);
+        textViewScore.setText(scoreText);
+    }
+
+    private void UpdateLife(Integer lifeValue){
+        life+=lifeValue;
+        String lifeText = getString(R.string.life, life);
+        textViewLife.setText(lifeText);
+    }
+
+    private void Validate(){
+        textViewAnswer.setText(String.valueOf(resultatAttendu));
+        round++;
+        String input = editCalcul.getText().toString().trim();
+        boolean mauvaiseReponse = false;
+
+        if (input.isEmpty()) {
+            mauvaiseReponse = true;
+        } else {
+            try {
+                int reponse = Integer.parseInt(input);
+                if (reponse == resultatAttendu) {
+                    UpdateScore(1);
+                } else {
+                    mauvaiseReponse = true;
+                }
+            } catch (NumberFormatException e) {
+                mauvaiseReponse = true;
+            }
+        }
+
+        if (mauvaiseReponse) {
+            UpdateScore(-1);
+            UpdateLife(-1);
+            if (life <= 0) goBackToHome();
+        }
+
+        ResetEditCalcul();
+        generateQuestion();
+    }
+
+    private void generateQuestion() {
+        System.out.println(round);
+        if (round < 3) {
+            generateQuestionVeryEasyMode();
+            startTimer(5000); // 5 secondes
+        } else if (round < 6) {
+            generateQuestionEasyMode();
+            startTimer(10000); // 10 secondes
+        } else if (round < 9) {
+            generateCalculMediumMode();
+            startTimer(15000); // 15 secondes
+        }
+        
+    }
 
     public int RandomGenerator(int max, int min){
         Random random = new Random();
@@ -153,107 +155,65 @@ public class CalculMentalActivity extends AppCompatActivity {
         return nombreAleatoire;
     }
 
-    private Integer generateCalculVeryEasyMode(){
-        int nombre1=RandomGenerator(50, 1);
-        int nombre2=RandomGenerator(50, 1);
+    private void generateQuestionVeryEasyMode(){
+        int nombre1=RandomGenerator(10, 1);
+        int nombre2=RandomGenerator(10, 1);
         int operation=RandomGenerator(2, 1);
-        int resultatAttendu;
         switch(operation){
             case 1:
                 resultatAttendu=nombre1+nombre2;
-                textViewCalcul.setText(nombre1 + " + " + nombre2 +" = ?");
+                textViewQuestion.setText(nombre1 + " + " + nombre2 +" = ?");
                 break;
             case 2:
                 resultatAttendu=nombre1-nombre2;
-                textViewCalcul.setText(nombre1 + " - " + nombre2 +" = ?");
-                break;
-            default:
-                resultatAttendu=nombre1+nombre2;
-                textViewCalcul.setText(nombre1 + " + " + nombre2 +" = ?");
+                textViewQuestion.setText(nombre1 + " - " + nombre2 +" = ?");
                 break;
         }
-        return resultatAttendu;
     }
 
-    private Integer generateCalculEasyMode(){
-        int nombre1;
-        int nombre2;
-        int nombre3;
-        int operation=RandomGenerator(5, 1);
-        int resultatAttendu;
+    private void generateQuestionEasyMode(){
+        int nombre1 = RandomGenerator(100, 1);;
+        int nombre2 = RandomGenerator(100, 1);;
+        int operation=RandomGenerator(3, 1);
         switch(operation){
             case 1:
-                nombre1=RandomGenerator(100, 1);
-                nombre2=RandomGenerator(100, 1);
-                nombre3=RandomGenerator(100, 1);
-                resultatAttendu=nombre1+nombre2+nombre3;
-                textViewCalcul.setText(nombre1 + " + " + nombre2 + " + " + nombre3 +" = ?");
+                resultatAttendu = nombre1 + nombre2;
+                textViewQuestion.setText(nombre1 + " + " + nombre2 + " = ?");
                 break;
             case 2:
-                nombre1=RandomGenerator(100, 1);
-                nombre2=RandomGenerator(100, 1);
-                nombre3=RandomGenerator(100, 1);
-                resultatAttendu=nombre1-nombre2-nombre3;
-                textViewCalcul.setText(nombre1 + " - " + nombre2 + " - " + nombre3 +" = ?");
+                resultatAttendu = nombre1 - nombre2;
+                textViewQuestion.setText(nombre1 + " - " + nombre2 + " = ?");
                 break;
             case 3:
-                nombre1=RandomGenerator(100, 1);
-                nombre2=RandomGenerator(100, 1);
-                nombre3=RandomGenerator(100, 1);
-                resultatAttendu=nombre1+nombre2-nombre3;
-                textViewCalcul.setText(nombre1 + " + " + nombre2 + " - " + nombre3 +" = ?");
-                break;
-            case 4:
-                nombre1=RandomGenerator(100, 1);
-                nombre2=RandomGenerator(100, 1);
-                nombre3=RandomGenerator(100, 1);
-                resultatAttendu=nombre1-nombre2+nombre3;
-                textViewCalcul.setText(nombre1 + " - " + nombre2 + " + " + nombre3 + " = ?");
-                break;
-            case 5:
-                nombre1=RandomGenerator(100, 1);
-                nombre2=RandomGenerator(10, 1);
-                resultatAttendu=nombre1*nombre2;
-                textViewCalcul.setText(nombre1 + " x " + nombre2 + " = ?");
-                break;
-            default:
-                nombre1=RandomGenerator(100, 1);
-                nombre2=RandomGenerator(10, 1);
-                resultatAttendu=nombre1*nombre2;
-                textViewCalcul.setText(nombre1 + " x " + nombre2 + " = ?");
+                nombre2 = RandomGenerator(10, 1);
+                resultatAttendu = nombre1 * nombre2;
+                textViewQuestion.setText(nombre1 + " X " + nombre2 + " = ?");
                 break;
         }
-        return resultatAttendu;
     }
 
-    private Integer generateCalculMediumMode(){
+    private void generateCalculMediumMode(){
         int nombre1=RandomGenerator(100, 1);
         int nombre2=RandomGenerator(100, 1);
         int nombre3=RandomGenerator(100, 1);
         int operation=RandomGenerator(4, 1);
-        int resultatAttendu;
         switch(operation){
             case 1:
                 resultatAttendu=nombre1+nombre2+nombre3;
-                textViewCalcul.setText(nombre1 + " + " + nombre2 + " + " + nombre3 +" = ?");
+                textViewQuestion.setText(nombre1 + " + " + nombre2 + " + " + nombre3 +" = ?");
                 break;
             case 2:
                 resultatAttendu=nombre1-nombre2-nombre3;
-                textViewCalcul.setText(nombre1 + " - " + nombre2 + " - " + nombre3 +" = ?");
+                textViewQuestion.setText(nombre1 + " - " + nombre2 + " - " + nombre3 +" = ?");
                 break;
             case 3:
                 resultatAttendu=nombre1+nombre2-nombre3;
-                textViewCalcul.setText(nombre1 + " + " + nombre2 + " - " + nombre3 +" = ?");
+                textViewQuestion.setText(nombre1 + " + " + nombre2 + " - " + nombre3 +" = ?");
                 break;
             case 4:
                 resultatAttendu=nombre1-nombre2+nombre3;
-                textViewCalcul.setText(nombre1 + " - " + nombre2 + " + " + nombre3 + " = ?");
-                break;
-            default:
-                resultatAttendu=nombre1+nombre2+nombre3;
-                textViewCalcul.setText(nombre1 + " + " + nombre2 + " + " + nombre3 +" = ?");
+                textViewQuestion.setText(nombre1 + " - " + nombre2 + " + " + nombre3 + " = ?");
                 break;
         }
-        return resultatAttendu;
     }
 }
