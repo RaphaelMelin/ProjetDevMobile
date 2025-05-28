@@ -2,6 +2,7 @@ package com.example.projetdevmobile;
 
 import android.app.AlertDialog;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.res.Configuration;
 import android.os.Bundle;
 import android.view.MenuItem;
@@ -23,8 +24,23 @@ public class MainActivity extends BaseActivity  {
     private Button buttonQuit;
     private Button languageButton;
 
+
+    private void setLocaleForApp(String langCode) {
+        Locale locale = new Locale(langCode);
+        Locale.setDefault(locale);
+
+        Configuration config = getResources().getConfiguration();
+        config.setLocale(locale);
+        getResources().updateConfiguration(config, getResources().getDisplayMetrics());
+    }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        // Charger la langue sauvegardée
+        SharedPreferences prefs = getSharedPreferences("app_prefs", MODE_PRIVATE);
+        String langCode = prefs.getString("app_language", Locale.getDefault().getLanguage());
+        setLocaleForApp(langCode);
+
         super.onCreate(savedInstanceState);
         EdgeToEdge.enable(this);
         setContentView(R.layout.activity_main);
@@ -98,6 +114,10 @@ public class MainActivity extends BaseActivity  {
         Configuration config = new Configuration();
         config.setLocale(locale);
         getResources().updateConfiguration(config, getResources().getDisplayMetrics());
+
+        // Sauvegarder la langue choisie
+        SharedPreferences prefs = getSharedPreferences("app_prefs", MODE_PRIVATE);
+        prefs.edit().putString("app_language", langCode).apply();
 
         // Redémarrer l'activité pour appliquer la langue
         recreate();
