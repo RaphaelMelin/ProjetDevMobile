@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">¡Adivíname!</string>
+
+
+    <string name="button_validate">Validar</string>
+    <string name="button_erase">Borrar</string>
+
+    <string name="button_play">Jugar</string>
+    <string name="select_language_btn">Seleccionar idioma</string>
+    <string name="button_quit">Salir</string>
+
+    <string name="home_menu_item">Inicio</string>
+    <string name="about_menu_item">Acerca de</string>
+
+    <string name="life" formatted="true">Vida: %1$d</string>
+    <string name="score" formatted="true">Puntuación: %1$d</string>
+
+    <string name="about_description">
+    Funciones adicionales añadidas:\n
+    - 4 idiomas disponibles\n
+    - guardado del apodo y la puntuación en un archivo\n
+    - página de clasificación\n
+    - puntuación, vidas y temporizador\n
+    - 3 niveles de dificultad: fácil, medio, difícil, según la puntuación
+    </string>
+
+    <string name="about_credit">Raphaël Mélin y Paul Maillard grupo G2</string>
+
+
+    <string name="leaderboard">Clasificación</string>
+    <string name="leaderboard_rank">Posición</string>
+    <string name="leaderboard_name">Nombre</string>
+    <string name="leaderboard_score">Puntuación</string>
+
+    <string name="edit_calcul_instruction">Introduce tu respuesta</string>
+</resources>

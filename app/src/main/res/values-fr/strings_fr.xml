@@ -11,10 +11,29 @@
 
 
     <string name="home_menu_item">Accueil</string>
-    <string name="about_menu_item">A propos</string>
+    <string name="about_menu_item">À propos</string>
     <string name="life" formatted="true">Vie : %1$d</string>
     <string name="score" formatted="true">Score : %1$d</string>
 
-    <string name="about_description">Raphaël Mélin et Paul Maillard BUT2</string>
+
+    <string name="about_description">
+    Fonctionnalités supplémentaires ajoutées :\n
+    - 4 langues disponibles\n
+    - sauvegarde du pseudo et du score dans un fichier\n
+    - page de classement\n
+    - score, vies et timer\n
+    - 3 niveaux de difficultés : facile, moyen, difficile, en fonction du score
+    </string>
+
+    <string name="about_credit">Raphaël Mélin et Paul Maillard groupe G2</string>
+
+
+    <string name="leaderboard">Classement</string>
+    <string name="leaderboard_rank">Rang</string>
+    <string name="leaderboard_name">Nom</string>
+    <string name="leaderboard_score">Score</string>
+
+
+
     <string name="edit_calcul_instruction">Entrez votre réponse</string>
 </resources>

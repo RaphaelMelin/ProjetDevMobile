@@ -22,7 +22,23 @@
     <string name="answer" translatable="false"> </string>
     <string name="question" translatable="false"> </string>
 
-    <string name="about_description">Raphaël Mélin and Paul Maillard BUT2</string>
+    <string name="about_description">
+    Additional features added:\n
+    - 4 available languages\n
+    - saving username and score in a file\n
+    - leaderboard page\n
+    - score, lives and timer\n
+    - 3 difficulty levels: easy, medium, hard, based on the score
+    </string>
+
+    <string name="about_credit">Raphaël Mélin and Paul Maillard group G2</string>
+
+
+
+    <string name="leaderboard">Leaderboard</string>
+    <string name="leaderboard_rank">Rank</string>
+    <string name="leaderboard_name">Name</string>
+    <string name="leaderboard_score">Score</string>
 
     <string name="edit_calcul_instruction">Enter your answer</string>
 </resources>

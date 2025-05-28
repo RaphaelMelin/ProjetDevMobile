@@ -34,9 +34,19 @@ public class MainActivity extends BaseActivity  {
 
         if (current.getLanguage().equals("fr")) {
             flagImageView.setImageResource(R.drawable.ic_flag_fr);
-        } else if (current.getLanguage().equals("en")) {
+        }
+        else if (current.getLanguage().equals("en")) {
             flagImageView.setImageResource(R.drawable.ic_flag_eng);
         }
+        else if (current.getLanguage().equals("es")) {
+            flagImageView.setImageResource(R.drawable.ic_flag_es);
+        }
+        else if (current.getLanguage().equals("ja")) {
+            flagImageView.setImageResource(R.drawable.ic_flag_jp);
+        }
+
+
+
 
 
         buttonPlay = findViewById(R.id.button_play);
@@ -44,6 +54,14 @@ public class MainActivity extends BaseActivity  {
             Intent intent = new Intent(this, CalculMentalActivity.class);
             startActivity(intent);
         });
+
+
+        Button buttonLeaderboard = findViewById(R.id.buttonLeaderboard);
+        buttonLeaderboard.setOnClickListener(v -> {
+            Intent intent = new Intent(MainActivity.this, LeaderboardActivity.class);
+            startActivity(intent);
+        });
+
 
 
         buttonQuit = findViewById(R.id.quit_button);
@@ -56,17 +74,23 @@ public class MainActivity extends BaseActivity  {
         languageButton = findViewById(R.id.select_language_btn);
         languageButton.setOnClickListener(v -> {
             AlertDialog.Builder builder = new AlertDialog.Builder(this);
-            String[] languages = {"Français", "English"};
+            String[] languages = {"Français", "English", "Español","日本語"};
 
             builder.setTitle(getString(R.string.select_language_btn))
                     .setItems(languages, (dialog, which) -> {
                         if (which == 0) {
                             setLocale("fr");
-                        } else {
+                        } else if (which == 1) {
                             setLocale("en");
+                        } else if (which == 2) {
+                            setLocale("es");
+                        }
+                        else if (which == 3) {
+                            setLocale("ja");  // code pour japonais
                         }
                     }).show();
         });
+
     }
     private void setLocale(String langCode) {
         Locale locale = new Locale(langCode);

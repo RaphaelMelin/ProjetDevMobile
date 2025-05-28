@@ -44,6 +44,16 @@
                 android:text="@string/button_play" />
 
 
+            <Button
+                android:id="@+id/buttonLeaderboard"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/leaderboard"
+                android:layout_marginTop="16dp" />
+
+
+
+
             <ImageView
                 android:id="@+id/flag_img"
                 android:layout_width="48dp"

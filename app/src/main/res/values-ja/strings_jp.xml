@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">当ててみて！</string>
+
+    <string name="edit_calcul" translatable="false"> </string>
+
+    <string name="button_validate">確認</string>
+    <string name="button_erase">消去</string>
+
+    <string name="button_play">プレイ</string>
+    <string name="select_language_btn">言語を選択</string>
+    <string name="button_quit">終了</string>
+
+    <string name="home_menu_item">ホーム</string>
+    <string name="about_menu_item">情報</string>
+
+    <string name="life" formatted="true">ライフ: %1$d</string>
+    <string name="score" formatted="true">スコア: %1$d</string>
+    <string name="timer" formatted="true" translatable="false">%1$s</string>
+
+    <string name="answer" translatable="false"> </string>
+    <string name="question" translatable="false"> </string>
+
+    <string name="about_description">
+    追加された機能：\n
+    - 4つの言語対応\n
+    - ユーザー名とスコアをファイルに保存\n
+    - ランキングページ\n
+    - スコア、ライフ、タイマー\n
+    - スコアに応じた3段階の難易度：簡単、普通、難しい
+    </string>
+
+    <string name="about_credit">Raphaël Mélin と Paul Maillard グループ G2</string>
+
+
+    <string name="leaderboard">ランキング</string>
+    <string name="leaderboard_rank">順位</string>
+    <string name="leaderboard_name">名前</string>
+    <string name="leaderboard_score">スコア</string>
+
+    <string name="edit_calcul_instruction">答えを入力してください</string>
+</resources>
