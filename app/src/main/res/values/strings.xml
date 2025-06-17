@@ -19,7 +19,10 @@
     <string name="score" formatted="true">Score : %1$d</string>
     <string name="timer" formatted="true" translatable="false">%1$s</string>
 
-    <string name="answer" translatable="false"> </string>
+    <string name="correct_answer" formatted="true" >Correct ! Answer is %1$d</string>
+    <string name="wrong_answer" formatted="true" >Wrong. Answer is %1$d</string>
+
+
     <string name="question" translatable="false"> </string>
 
     <string name="about_description">

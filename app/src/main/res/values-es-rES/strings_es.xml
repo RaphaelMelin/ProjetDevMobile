@@ -16,6 +16,9 @@
     <string name="life" formatted="true">Vida: %1$d</string>
     <string name="score" formatted="true">Puntuación: %1$d</string>
 
+    <string name="correct_answer" formatted="true">¡Correcto! La respuesta es %1$d</string>
+    <string name="wrong_answer" formatted="true">Incorrecto. La respuesta es %1$d</string>
+
     <string name="about_description">
     Funciones adicionales añadidas:\n
     - 4 idiomas disponibles\n

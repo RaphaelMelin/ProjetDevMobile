@@ -15,6 +15,8 @@
     <string name="life" formatted="true">Vie : %1$d</string>
     <string name="score" formatted="true">Score : %1$d</string>
 
+    <string name="correct_answer" formatted="true">Correct ! La réponse est %1$d</string>
+    <string name="wrong_answer" formatted="true">Faux. La réponse est %1$d</string>
 
     <string name="about_description">
     Fonctionnalités supplémentaires ajoutées :\n

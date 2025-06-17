@@ -1,12 +1,9 @@
 package com.example.projetdevmobile;
 
 import android.app.AlertDialog;
-import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.os.CountDownTimer;
-import android.view.Menu;
-import android.view.MenuInflater;
-import android.view.MenuItem;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -14,10 +11,6 @@ import android.view.View;
 import android.widget.TextView;
 
 import androidx.activity.EdgeToEdge;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.graphics.Insets;
-import androidx.core.view.ViewCompat;
-import androidx.core.view.WindowInsetsCompat;
 
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -53,13 +46,13 @@ public class CalculMentalActivity extends BaseActivity  {
         EdgeToEdge.enable(this);
         setContentView(R.layout.activity_mental_calculation);
 
+        // Récupérer les textViews et les imageViews
         editCalcul = findViewById(R.id.edit_calcul);
         textViewAnswer = findViewById(R.id.textViewAnswer);
         textViewQuestion = findViewById(R.id.textViewQuestion);
 
         textViewTimer = findViewById(R.id.timer);
         textViewScore = findViewById(R.id.score);
-     //   textViewLife = findViewById(R.id.life);
 
         heart3 = findViewById(R.id.heart3);
         heart2 = findViewById(R.id.heart2);
@@ -74,7 +67,7 @@ public class CalculMentalActivity extends BaseActivity  {
         UpdateScore(0);
         UpdateLife(0);
         generateQuestion();
-
+        textViewAnswer.setVisibility(View.GONE);
     }
 
 
@@ -111,8 +104,7 @@ public class CalculMentalActivity extends BaseActivity  {
 
     private void UpdateScore(Integer scoreValue){
         score+=scoreValue;
-        String scoreText = getString(R.string.score, score);
-        textViewScore.setText(scoreText);
+        textViewScore.setText(getString(R.string.score, score));
     }
 
     private void UpdateLife(Integer lifeValue){
@@ -159,7 +151,8 @@ public class CalculMentalActivity extends BaseActivity  {
 
     private void Validate(){
         System.out.println("Validate");
-        textViewAnswer.setText(String.valueOf(resultatAttendu));
+        textViewAnswer.setVisibility(View.VISIBLE);
+
         round++;
         String input = editCalcul.getText().toString().trim();
         boolean mauvaiseReponse = false;
@@ -170,6 +163,8 @@ public class CalculMentalActivity extends BaseActivity  {
             try {
                 int reponse = Integer.parseInt(input);
                 if (reponse == resultatAttendu) {
+                    textViewAnswer.setText(getString(R.string.correct_answer, resultatAttendu));
+                    textViewAnswer.setTextColor(Color.GREEN);
                     UpdateScore(1);
                 } else {
                     mauvaiseReponse = true;
@@ -181,6 +176,9 @@ public class CalculMentalActivity extends BaseActivity  {
 
         boolean keepPlaying = true;
         if (mauvaiseReponse) {
+            textViewAnswer.setText(getString(R.string.wrong_answer, resultatAttendu));
+            textViewAnswer.setTextColor(Color.RED);
+
             UpdateLife(-1);
             if (life <= 0){
                 keepPlaying = false;

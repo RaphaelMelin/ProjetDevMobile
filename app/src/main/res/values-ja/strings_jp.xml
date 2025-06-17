@@ -18,8 +18,12 @@
     <string name="score" formatted="true">スコア: %1$d</string>
     <string name="timer" formatted="true" translatable="false">%1$s</string>
 
-    <string name="answer" translatable="false"> </string>
+
     <string name="question" translatable="false"> </string>
+
+    <string name="correct_answer" formatted="true">正解です！答えは %1$d です</string>
+    <string name="wrong_answer" formatted="true">間違いです。答えは %1$d です</string>
+
 
     <string name="about_description">
     追加された機能：\n
