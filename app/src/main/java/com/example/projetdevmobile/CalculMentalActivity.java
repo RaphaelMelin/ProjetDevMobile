@@ -22,7 +22,6 @@ public class CalculMentalActivity extends BaseActivity  {
     private TextView textViewAnswer;
     private TextView textViewQuestion;
     private Integer resultatAttendu;
-   // private TextView textViewLife;
     private Integer life = 3;
     private ImageView heart3;
     private ImageView heart2;
@@ -34,11 +33,8 @@ public class CalculMentalActivity extends BaseActivity  {
     private TextView textViewTimer;
     private CountDownTimer timer;
 
-    private Integer round = 1;
-
     private Button buttonValidate;
-    private Integer playerEntry=0;
-    private Integer numberRound;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState){
@@ -85,7 +81,6 @@ public class CalculMentalActivity extends BaseActivity  {
             public void onTick(long millisUntilFinished) {
                 long seconds = millisUntilFinished / 1000;
                 long minutes = seconds / 60;
-                long remainingSeconds = seconds % 60;
                 String timeFormatted = String.format(Locale.US, "%d:%02d", minutes, seconds);
                 textViewTimer.setText(timeFormatted);
             }
@@ -153,7 +148,6 @@ public class CalculMentalActivity extends BaseActivity  {
         System.out.println("Validate");
         textViewAnswer.setVisibility(View.VISIBLE);
 
-        round++;
         String input = editCalcul.getText().toString().trim();
         boolean mauvaiseReponse = false;
 
@@ -223,8 +217,7 @@ public class CalculMentalActivity extends BaseActivity  {
 
     public int RandomGenerator(int max, int min){
         Random random = new Random();
-        int nombreAleatoire = random.nextInt(max-min+1) + min;
-        return nombreAleatoire;
+        return random.nextInt(max-min+1) + min;
     }
 
     private void generateQuestionEasyMode(){
@@ -264,8 +257,8 @@ public class CalculMentalActivity extends BaseActivity  {
 
     private void generateQuestionMediumMode(){
         System.out.println("generateQuestionMediumMode");
-        int nombre1 = RandomGenerator(100, 1);;
-        int nombre2 = RandomGenerator(100, 1);;
+        int nombre1 = RandomGenerator(100, 1);
+        int nombre2 = RandomGenerator(100, 1);
         int operation=RandomGenerator(3, 1);
         switch(operation){
             case 1:
